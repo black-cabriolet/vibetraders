@@ -63,15 +63,7 @@ export default function InstallPrompt() {
         if (!deferredPrompt) return;
 
         await deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-
-        if (outcome === "accepted") {
-            setTimeout(() => {
-                if (isSupported && !isSubscribed && Notification.permission === "default") {
-                    setShowNotificationPrompt(true);
-                }
-            }, 1000);
-        }
+        await deferredPrompt.userChoice;
 
         setDeferredPrompt(null);
         setShowInstallPrompt(false);
@@ -105,18 +97,21 @@ export default function InstallPrompt() {
                     <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-3">
                             <Image
-                                src="/icons/android-chrome-192x192.png"
-                                alt="Malipo Tech"
+                                src="/android-chrome-192x192.png"
+                                alt="VibeTraders"
                                 width={48}
                                 height={48}
                                 className="w-12 h-12 rounded-lg"
                             />
 
                             <div>
-                                <h3 className="font-semibold text-card-foreground">Install Malipo Tech</h3>
-                                <p className="text-sm text-muted-foreground">Access payments instantly — right from your home screen.</p>
+                                <h3 className="font-semibold text-card-foreground">Install VibeTraders</h3>
+                                <p className="text-sm text-muted-foreground">
+                                    Track markets and manage your trading vibes — right from your home screen.
+                                </p>
                             </div>
                         </div>
+
                         <button
                             onClick={handleDismissInstall}
                             className="text-muted-foreground hover:text-foreground transition-colors"
@@ -149,8 +144,10 @@ export default function InstallPrompt() {
                                 <Bell className="h-6 w-6 text-accent" />
                             </div>
                             <div>
-                                <h3 className="font-semibold text-card-foreground">Enable Notifications</h3>
-                                <p className="text-sm text-muted-foreground">Get alerts when payments require approval.</p>
+                                <h3 className="font-semibold text-card-foreground">Enable Market Alerts</h3>
+                                <p className="text-sm text-muted-foreground">
+                                    Get notified when stocks move or watchlist events happen.
+                                </p>
                             </div>
                         </div>
                         <button
